@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import { useNavigate } from 'react-router-dom';
 import { signOut } from "firebase/auth";
 import { auth } from '../../services/firebase'
+import Context from './../../Context/Context';
+import Menu from './Components/Menu/Menu';
+import Colunas from "./Components/Colunas/Colunas";
 import './Home.css';
 
 function Home() {
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('eTask-user')))
+    const [user, setUser] = useContext(Context);
+
     const analytics = getAnalytics();
     let navigate = useNavigate();
 
@@ -21,18 +25,19 @@ function Home() {
     }
 
     useEffect(() => {
-        if (user?.displayName == null)
-            navigate("/");
+        // if (user?.displayName == null)
+        //     navigate("/");
 
-        logEvent(analytics, 'screen_view', {
-            firebase_screen: "Home",
-            firebase_screen_class: "Home"
-        });
-    });
+        // logEvent(analytics, 'screen_view', {
+        //     firebase_screen: "Home",
+        //     firebase_screen_class: "Home"
+        // });
+    }, [user]);
 
     return (
         <div>
-            <h1>Oi</h1>
+            <Menu />
+            <Colunas />
             <button onClick={sair}>Sair</button>
         </div>
     )

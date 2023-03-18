@@ -1,28 +1,29 @@
 import { auth, provider } from '../../services/firebase'
 import { signInWithPopup } from 'firebase/auth'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAnalytics, logEvent } from "firebase/analytics";
+import Context from './../../Context/Context';
 import './Login.css';
 
 function Login() {
-    const [user, setUser] = useState(localStorage.getItem('eTask-user'));
+    const [user, setUser] = useContext(Context);
+
     let navigate = useNavigate();
     const analytics = getAnalytics();
 
     const logar = () => {
-        signInWithPopup(auth, provider).then((data) => {
-            let response = {
-                displayName: data.user.displayName,
-                photoURL: data.user.photoURL
-            }
-            localStorage.setItem('eTask-user', JSON.stringify(response))
+        // signInWithPopup(auth, provider).then((data) => {
+        //     let response = {
+        //         displayName: data.user.displayName,
+        //         photoURL: data.user.photoURL
+        //     }
+            // setUser(response);
             navigate("/home");
-        })
+        // })
     }
 
     useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem('eTask-user')));
         if (user)
             navigate("/home");
 

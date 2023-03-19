@@ -5,7 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth } from '../../services/firebase'
 import { FaTrash } from 'react-icons/fa';
 import { VscSignOut } from 'react-icons/vsc';
-import { getTarefas, deleteTarefa, postTarefa } from './../../Services/api';
+import { getTarefas, deleteTarefa, postTarefa } from '../../services/api';
 import Avatar from '@mui/material/Avatar';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';

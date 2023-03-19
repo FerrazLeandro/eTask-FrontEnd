@@ -1,7 +1,7 @@
 import Rotas from './Rotas/Rotas';
 import Context from './Context/Context';
 import { useState } from 'react';
-import './reset.css'
+import './reset.css';
 import './App.css';
 
 function App() {

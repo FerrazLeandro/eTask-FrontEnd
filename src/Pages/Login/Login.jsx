@@ -1,6 +1,6 @@
-import { auth, provider } from '../../services/firebase'
+import { auth, provider } from '../../Services/firebase'
 import { signInWithPopup } from 'firebase/auth'
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import Context from './../../Context/Context';

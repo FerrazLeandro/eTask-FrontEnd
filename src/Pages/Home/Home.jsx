@@ -11,8 +11,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Context from './../../Context/Context';
-import './Home.css';
 import Footer from "../../Components/Footer/Footer";
+import './Home.css';
 
 function Home() {
     const [tarefas, setTarefas] = useState([]);

@@ -10,6 +10,8 @@ import Link from '@mui/material/Link';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import './Login.css';
+import { postUsuario } from '../../services/api';
+import { getUsuario } from './../../services/api';
 
 function Login() {
     const [user, setUser] = useContext(Context);
@@ -19,18 +21,46 @@ function Login() {
 
     const logar = () => {
         signInWithPopup(auth, provider).then((data) => {
-            let response = {
-                nome: data.user.displayName,
-                foto: data.user.photoURL,
-                email: data.user.email,
-                usuario: {
-                    id: 1
-                }
-            }
-            console.log(data)
-            setUser(response);
-            navigate("/home");
+            buscarUsuario(data.user)
         })
+    }
+
+    const buscarUsuario = async (user) => {
+        try {
+            const data = await getUsuario(user.email);
+
+            if (!data) {
+                criarUsuario(user)
+            } else {
+                const usuario = {
+                    id: data?.id,
+                    nome: data?.nome,
+                    foto: data?.foto,
+                    email: data?.email,
+                }
+                setUser(usuario)
+                navigate("/home");
+            }
+        } catch (e) {
+            console.error(e)
+        }
+
+    }
+
+    const criarUsuario = async (user) => {
+        const usuario = {
+            nome: user?.displayName,
+            foto: user?.photoURL,
+            email: user?.email,
+        }
+
+        try {
+            const { data } = await postUsuario(usuario);
+            setUser(data);
+            navigate("/home");
+        } catch (e) {
+            console.error(e)
+        }
     }
 
     useEffect(() => {
@@ -41,7 +71,7 @@ function Login() {
             firebase_screen: "Login",
             firebase_screen_class: "Login"
         });
-    }, [user]);
+    }, []);
 
 
     return (

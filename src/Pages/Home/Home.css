@@ -1,12 +1,12 @@
-.container {
-    width: 100vw;
+.main {
+    display: grid;
     grid-auto-flow: column;
+    width: 100vw;
     justify-content: center;
     gap: 10px;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scroll-padding-left: 20px;
-    display: grid;
 }
 
 .coluna {
@@ -14,8 +14,8 @@
     flex-direction: column;
     gap: 15px;
     width: 260px;
-    min-height: 10vh;
     max-height: 80vh;
+    min-height: 50px;
     background-color: #161616;
     color: #fff;
     border-radius: 15px;
@@ -103,7 +103,6 @@ html ::-webkit-scrollbar-track {
 
 .divFooter {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: baseline;
 }

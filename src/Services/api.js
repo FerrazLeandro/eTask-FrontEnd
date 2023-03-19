@@ -32,3 +32,21 @@ export const deleteTarefa = async (tarefa) => {
         console.error(e)
     }
 }
+
+export const getUsuario = async (email) => {
+    try {
+        const { data } = await api.get(`/usuario/${email}`)
+        return data
+    } catch (e) {
+        console.error(e)
+    }
+}
+
+export const postUsuario = async (usuario) => {
+    try {
+        const data = await api.post("/usuario", usuario)
+        return data
+    } catch (e) {
+        console.error(e)
+    }
+}

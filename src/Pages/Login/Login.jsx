@@ -6,18 +6,9 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 import Context from './../../Context/Context';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
-import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './Login.css';
 
 function Login() {
@@ -29,9 +20,14 @@ function Login() {
     const logar = () => {
         signInWithPopup(auth, provider).then((data) => {
             let response = {
-                displayName: data.user.displayName,
-                photoURL: data.user.photoURL
+                nome: data.user.displayName,
+                foto: data.user.photoURL,
+                email: data.user.email,
+                usuario: {
+                    id: 1
+                }
             }
+            console.log(data)
             setUser(response);
             navigate("/home");
         })

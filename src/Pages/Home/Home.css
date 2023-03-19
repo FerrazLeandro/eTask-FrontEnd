@@ -15,14 +15,13 @@
     gap: 15px;
     width: 260px;
     min-height: 10vh;
+    max-height: 80vh;
     background-color: #161616;
     color: #fff;
     border-radius: 15px;
-    text-align: center;
     padding: 20px;
-    height: 80vh;
     overflow-y: scroll;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 html ::-webkit-scrollbar {
@@ -42,18 +41,20 @@ html ::-webkit-scrollbar-track {
     flex-direction: column;
     gap: 15px;
     width: 260px;
-    min-height: 10vh;
+    height: 400px;
     background-color: #161616;
     color: #fff;
     border-radius: 15px;
-    text-align: center;
     padding: 20px;
+    margin-top: 40px;
 }
 
 .divUsuario {
     display: flex;
-    align-items: center;
+    text-align: start;
     gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .nomeColuna {
@@ -111,6 +112,15 @@ html ::-webkit-scrollbar-track {
     color: #ff4040;
     width: 20px;
     height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-self: self-end;
+}
+
+.iconeSair {
+    color: #ff4040;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     display: flex;
     align-self: self-end;

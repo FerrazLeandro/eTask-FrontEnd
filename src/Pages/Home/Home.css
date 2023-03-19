@@ -1,0 +1,122 @@
+.container {
+    width: 100vw;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 10px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
+    display: grid;
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 260px;
+    min-height: 10vh;
+    background-color: #161616;
+    color: #fff;
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+    height: 80vh;
+    overflow-y: scroll;
+    margin-top: 20px;
+}
+
+html ::-webkit-scrollbar {
+    width: 0;
+}
+
+html ::-webkit-scrollbar-thumb {
+    background: #6e6ea9;
+}
+
+html ::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.colunaUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 260px;
+    min-height: 10vh;
+    background-color: #161616;
+    color: #fff;
+    border-radius: 15px;
+    text-align: center;
+    padding: 20px;
+}
+
+.divUsuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nomeColuna {
+    color: #a2a2a2;
+    border-bottom: 1px solid #a2a2a2;
+    text-align: start;
+    font-size: large;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 10px;
+    background-color: #252525;
+    border-radius: 15px;
+    padding: 15px;
+}
+
+.input {
+    width: 100%;
+    background-color: #ffffff36;
+    color: #fff;
+    border: none;
+    resize: none;
+    overflow-y: hidden;
+    border-radius: 5px;
+}
+
+.divTitulo {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #1616;
+    padding-bottom: 5px;
+}
+
+.titulo,
+.descricao {
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    resize: none;
+    overflow-y: hidden;
+}
+
+.divFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.icone {
+    color: #ff4040;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-self: self-end;
+}
+
+.data {
+    font-size: 14px;
+    font-style: italic;
+}

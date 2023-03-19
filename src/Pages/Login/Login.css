@@ -1,0 +1,28 @@
+.containerLogin {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.login {
+    width: 40vw;
+    height: 100vh;
+    background-color: #161616;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.introducao {
+    width: 80%;
+}
+
+.introducao > p {
+    margin-bottom: 15px;
+}

@@ -15,6 +15,15 @@ export const getTarefas = async () => {
     }
 }
 
+export const postTarefa = async (tarefa) => {
+    try {
+        const data = await api.post("/tarefa", tarefa)
+        return data
+    } catch (e) {
+        console.error(e)
+    }
+}
+
 export const deleteTarefa = async (tarefa) => {
     try {
         const data = await api.delete(`/tarefa/${tarefa.id}`)

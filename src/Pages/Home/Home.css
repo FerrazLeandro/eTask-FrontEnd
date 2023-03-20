@@ -109,6 +109,11 @@ html ::-webkit-scrollbar-track {
     cursor: pointer;
 }
 
+.menu {
+    width: 24px;
+    height: 24px;
+}
+
 .divFooter {
     display: flex;
     justify-content: space-between;

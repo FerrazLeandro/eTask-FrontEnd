@@ -1,8 +1,10 @@
-import { auth, provider } from '../../services/firebase'
 import { signInWithPopup } from 'firebase/auth'
+import { auth, provider } from '../../services/firebase';
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAnalytics, logEvent } from "firebase/analytics";
+import { postUsuario } from '../../services/api';
+import { getUsuario } from './../../services/api';
 import Context from './../../Context/Context';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -10,8 +12,6 @@ import Link from '@mui/material/Link';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import './Login.css';
-import { postUsuario } from '../../services/api';
-import { getUsuario } from './../../services/api';
 
 function Login() {
     const [user, setUser] = useContext(Context);

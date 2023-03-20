@@ -9,19 +9,25 @@
     scroll-padding-left: 20px;
 }
 
-.coluna {
+.divColuna {
     display: flex;
     flex-direction: column;
     gap: 15px;
     width: 260px;
-    max-height: 80vh;
+    max-height: 75vh;
     min-height: 50px;
     background-color: #161616;
     color: #fff;
     border-radius: 15px;
     padding: 20px;
+    margin-top: 20px;
+}
+
+.coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     overflow-y: scroll;
-    margin-top: 40px;
 }
 
 html ::-webkit-scrollbar {
@@ -41,7 +47,7 @@ html ::-webkit-scrollbar-track {
     flex-direction: column;
     gap: 15px;
     width: 260px;
-    height: 400px;
+    height: 350px;
     background-color: #161616;
     color: #fff;
     border-radius: 15px;
@@ -58,7 +64,7 @@ html ::-webkit-scrollbar-track {
 }
 
 .nomeColuna {
-    color: #a2a2a2;
+    color: #fff;
     border-bottom: 1px solid #a2a2a2;
     text-align: start;
     font-size: large;
@@ -72,6 +78,7 @@ html ::-webkit-scrollbar-track {
     background-color: #252525;
     border-radius: 15px;
     padding: 15px;
+    cursor: pointer;
 }
 
 .input {
@@ -99,6 +106,7 @@ html ::-webkit-scrollbar-track {
     border: none;
     resize: none;
     overflow-y: hidden;
+    cursor: pointer;
 }
 
 .divFooter {
@@ -111,15 +119,6 @@ html ::-webkit-scrollbar-track {
     color: #ff4040;
     width: 20px;
     height: 20px;
-    cursor: pointer;
-    display: flex;
-    align-self: self-end;
-}
-
-.iconeSair {
-    color: #ff4040;
-    width: 30px;
-    height: 30px;
     cursor: pointer;
     display: flex;
     align-self: self-end;

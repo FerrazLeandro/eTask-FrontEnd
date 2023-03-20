@@ -1,10 +1,7 @@
 import { useEffect, useContext, useState } from "react";
 import { getAnalytics, logEvent } from "firebase/analytics";
 import { useNavigate } from 'react-router-dom';
-import { signOut } from "firebase/auth";
-import { auth } from '../../services/firebase'
 import { FaTrash } from 'react-icons/fa';
-import { VscSignOut } from 'react-icons/vsc';
 import { getTarefas, deleteTarefa, postTarefa } from '../../services/api';
 import Avatar from '@mui/material/Avatar';
 import AddIcon from '@mui/icons-material/Add';
@@ -12,13 +9,16 @@ import Button from '@mui/material/Button';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import Context from './../../Context/Context';
 import Footer from "../../Components/Footer/Footer";
+import Header from "../../Components/Header/Header";
 import './Home.css';
 
 function Home() {
-    const [tarefas, setTarefas] = useState([]);
     const [descricao, setDescricao] = useState('');
     const [titulo, setTitulo] = useState('');
     const [user, setUser] = useContext(Context);
+    const [aberta, setAberta] = useState([])
+    const [emAndamento, setEmAndamento] = useState([])
+    const [concluida, setConcluida] = useState([])
 
     const analytics = getAnalytics();
     let navigate = useNavigate();
@@ -26,7 +26,9 @@ function Home() {
     const buscarTarefas = async () => {
         try {
             const data = await getTarefas();
-            setTarefas(data);
+            setAberta(data.filter((item) => item.status === 1));
+            setEmAndamento(data.filter((item) => item.status === 2));
+            setConcluida(data.filter((item) => item.status === 3));
         } catch (e) {
             console.error(e);
         }
@@ -61,17 +63,6 @@ function Home() {
         }
     }
 
-
-    function sair() {
-        signOut(auth).then(() => {
-            navigate("/");
-            setUser('')
-        }).catch((error) => {
-            alert("Erro ao sair da conta")
-        });
-
-    }
-
     useEffect(() => {
         if (!user)
             navigate("/");
@@ -85,11 +76,11 @@ function Home() {
 
     return (
         <div>
+            <Header />
             <div className="main">
                 <div>
                     <div className="colunaUsuario">
                         <div className='divUsuario'>
-                            <Avatar alt="Usuário" sx={{ width: 40, height: 40 }} src={user?.foto} />
                             <p>Olá {user?.nome}, que tal adicionar novas tarefas ao quadro?</p>
                         </div>
                         <div className='card' >
@@ -110,78 +101,70 @@ function Home() {
                                 onChange={e => setDescricao(e.target.value)}
                             />
                             <Button onClick={() => criarTarefa()} variant="outlined" startIcon={<AddIcon />}>
-                                Add Task
+                                Adicionar
                             </Button>
-                            <VscSignOut className='iconeSair' onClick={() => sair()} /></div>
+                        </div>
                     </div>
                 </div>
                 <div>
-                    <div className="coluna">
+                    <div className="divColuna">
                         <p className='nomeColuna'>A Fazer</p>
-                        {tarefas?.map((tarefa) =>
-                            <>
-                                {
-                                    tarefa.status == 1 &&
-                                    <div className='card' key={tarefa.id}>
-                                        <div className='divTitulo'>
-                                            <textarea className='titulo' spellCheck value={tarefa.titulo} maxLength={50} disabled />
-                                            <Avatar alt="Usuário" sx={{ width: 28, height: 28 }} src={tarefa.usuario.foto} />
-                                        </div>
-                                        <textarea className='descricao' rows={5} spellCheck type="text" value={tarefa.descricao} maxLength={50} disabled />
-                                        <div className='divFooter'>
-                                            <p className='data'>Criado: {tarefa.criacao}</p>
-                                            <FaTrash className='icone' onClick={() => deletarTarefa(tarefa)} />
-                                        </div>
+                        <div className="coluna">
+                            {aberta?.map((tarefa) =>
+                                <div className='card' key={tarefa.id} draggable="true">
+                                    <div className='divTitulo'>
+                                        <textarea className='titulo' spellCheck value={tarefa.titulo} maxLength={50} disabled />
+                                        <Avatar alt="Usuário" sx={{ width: 28, height: 28 }} src={tarefa.usuario.foto} />
                                     </div>
-                                }
-                            </>
-                        )}
+                                    <textarea className='descricao' rows={5} spellCheck type="text" value={tarefa.descricao} maxLength={50} disabled />
+                                    <div className='divFooter'>
+                                        <p className='data'>Criado: {tarefa.criacao}</p>
+                                        <FaTrash className='icone' onClick={() => deletarTarefa(tarefa)} />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div>
-                    <div className="coluna">
+                    <div className="divColuna">
                         <p className='nomeColuna'>Em Andamento</p>
-                        {tarefas?.map((tarefa) =>
-                            <>
-                                {
-                                    tarefa.status == 2 &&
-                                    <div className='card' key={tarefa.id}>
-                                        <div className='divTitulo'>
-                                            <textarea className='titulo' rows={4} spellCheck value={tarefa.titulo} maxLength={50} disabled />
-                                            <Avatar alt="Usuário" sx={{ width: 28, height: 28 }} src={tarefa.usuario.foto} />
-                                        </div>
-                                        <textarea className='descricao' rows={5} spellCheck type="text" value={tarefa.descricao} maxLength={200} disabled />
-                                        <div className='divFooter'>
-                                            <p className='data'>Criado: {tarefa.criacao}</p>
-                                            <FaTrash className='icone' onClick={() => deletarTarefa(tarefa)} />
-                                        </div>
+                        <div className="coluna">
+                            {emAndamento?.map((tarefa) =>
+
+                                <div className='card' key={tarefa.id} draggable="true">
+                                    <div className='divTitulo'>
+                                        <textarea className='titulo' rows={4} spellCheck value={tarefa.titulo} maxLength={50} disabled />
+                                        <Avatar alt="Usuário" sx={{ width: 28, height: 28 }} src={tarefa.usuario.foto} />
                                     </div>
-                                }
-                            </>
-                        )}
+                                    <textarea className='descricao' rows={5} spellCheck type="text" value={tarefa.descricao} maxLength={200} disabled />
+                                    <div className='divFooter'>
+                                        <p className='data'>Criado: {tarefa.criacao}</p>
+                                        <FaTrash className='icone' onClick={() => deletarTarefa(tarefa)} />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div>
-                    <div className="coluna">
+                    <div className="divColuna">
                         <p className='nomeColuna'>Concluído</p>
-                        {tarefas?.map((tarefa) =>
-                            <>
-                                {
-                                    tarefa.status == 3 &&
-                                    <div className='card' key={tarefa.id}>
-                                        <div className='divTitulo'>
-                                            <textarea className='titulo' spellCheck value={tarefa.titulo} maxLength={50} disabled />
-                                            <Avatar alt="Usuário" sx={{ width: 28, height: 28 }} src={tarefa.usuario.foto} />
-                                        </div>
-                                        <textarea className='descricao' rows={5} spellCheck type="text" value={tarefa.descricao} maxLength={200} disabled />
-                                        <div className='divFooter'>
-                                            <p className='data'>Criado: {tarefa.criacao}</p>
-                                            <FaTrash className='icone' onClick={() => deletarTarefa(tarefa)} />
-                                        </div>
+                        <div className="coluna">
+                            {concluida?.map((tarefa) =>
+                                <div className='card' key={tarefa.id} draggable="true">
+                                    <div className='divTitulo'>
+                                        <textarea className='titulo' spellCheck value={tarefa.titulo} maxLength={50} disabled />
+                                        <Avatar alt="Usuário" sx={{ width: 28, height: 28 }} src={tarefa.usuario.foto} />
                                     </div>
-                                }
-                            </>
-                        )}
+                                    <textarea className='descricao' rows={5} spellCheck type="text" value={tarefa.descricao} maxLength={200} disabled />
+                                    <div className='divFooter'>
+                                        <p className='data'>Criado: {tarefa.criacao}</p>
+                                        <FaTrash className='icone' onClick={() => deletarTarefa(tarefa)} />
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

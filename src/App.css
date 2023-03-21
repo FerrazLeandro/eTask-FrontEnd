@@ -3,7 +3,15 @@
 body {
     width: 100vw;
     height: 100vh;
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgb(184, 183, 209) 0%, rgb(177, 177, 211) 35%, rgba(0,212,255,1) 100%);
+    background-image: url('./assets/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: 'Roboto', sans-serif;;
+}
+
+@media (max-width: 768px) {
+    body {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgb(184, 183, 209) 0%, rgb(177, 177, 211) 35%, rgba(0,212,255,1) 100%);
+    }
 }

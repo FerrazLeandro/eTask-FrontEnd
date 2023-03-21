@@ -7,6 +7,8 @@ import { getTarefas, putTarefa } from '../../../../services/api';
 import { useState } from 'react';
 import TarefaContext from './../../../../Context/TarefaContext';
 import { useContext } from 'react';
+import { ReactNotifications, Store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
 
 function MenuCard(tarefa) {
     const [tarefas, setTarefas] = useContext(TarefaContext);
@@ -31,7 +33,23 @@ function MenuCard(tarefa) {
         }
     }
 
-    const atualizarTarefa = async (tarefaDetalhe, status) => {
+    function handleShow (mensagem, tipo) {
+        Store.addNotification({
+            title: "eTask",
+            message: mensagem,
+            type: tipo,
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        });
+    }
+
+    const atualizarTarefa = async (tarefaDetalhe, status, descricaoStatus) => {
         try {
             const tarefaAtualizada = {
                 id: tarefaDetalhe.state.data.id,
@@ -45,6 +63,7 @@ function MenuCard(tarefa) {
             }
             await putTarefa(tarefaAtualizada);
             buscarTarefas()
+            handleShow("Tarefa " + descricaoStatus + " com sucesso", "success")
         } catch (e) {
             console.error(e);
         }
@@ -82,9 +101,9 @@ function MenuCard(tarefa) {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <MenuItem onClick={() => atualizarTarefa(tarefaDetalhe, 2)}>Iniciar</MenuItem>
-                <MenuItem onClick={() => atualizarTarefa(tarefaDetalhe, 3)}>Concluir</MenuItem>
-                <MenuItem onClick={() => atualizarTarefa(tarefaDetalhe, 1)}>Reabrir</MenuItem>
+                <MenuItem onClick={() => atualizarTarefa(tarefaDetalhe, 2, "iniciada")}>Iniciar</MenuItem>
+                <MenuItem onClick={() => atualizarTarefa(tarefaDetalhe, 3, "concluída")}>Concluir</MenuItem>
+                <MenuItem onClick={() => atualizarTarefa(tarefaDetalhe, 1, "reaberta")}>Reabrir</MenuItem>
             </Menu>
         </div>
     );

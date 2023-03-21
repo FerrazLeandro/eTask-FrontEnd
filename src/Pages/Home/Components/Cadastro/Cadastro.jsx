@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import Context from './../../../../Context/Context';
 import TarefaContext from './../../../../Context/TarefaContext';
+import { ReactNotifications, Store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css'
 import './Cadastro.css'
 
 function Cadastro() {
@@ -24,28 +26,50 @@ function Cadastro() {
         }
     }
 
-    const criarTarefa = async () => {
-        try {
-            const tarefaCadastrada = {
-                titulo: titulo,
-                descricao: descricao,
-                criacao: new Date(Date.now()),
-                status: 1,
-                usuario: {
-                    id: user.id
-                }
+    function handleShow (mensagem, tipo) {
+        Store.addNotification({
+            title: "eTask",
+            message: mensagem,
+            type: tipo,
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
             }
-            const data = await postTarefa(tarefaCadastrada);
-            buscarTarefas();
-            setTitulo('');
-            setDescricao('');
-        } catch (e) {
-            console.error(e);
+        });
+    }
+
+    const criarTarefa = async () => {
+        if (titulo == '' || descricao == '') {
+            handleShow("Campos obrigatórios em branco", "danger")
+        } else {
+            try {
+                const tarefaCadastrada = {
+                    titulo: titulo,
+                    descricao: descricao,
+                    criacao: new Date(Date.now()),
+                    status: 1,
+                    usuario: {
+                        id: user.id
+                    }
+                }
+                const data = await postTarefa(tarefaCadastrada);
+                handleShow("Tarefa cadastrada com sucesso!", "success")
+                buscarTarefas();
+                setTitulo('');
+                setDescricao('');
+            } catch (e) {
+                console.error(e);
+            }
         }
     }
 
     return (
         <div>
+            <ReactNotifications />
             <div className="colunaUsuario">
                 <div className='divUsuario'>
                     <p>Olá {user?.nome}, que tal adicionar novas tarefas ao quadro?</p>

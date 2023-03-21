@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { deleteTarefa, getTarefas } from '../../../../services/api';
 import TarefaContext from './../../../../Context/TarefaContext';
 import { useContext } from 'react';
+import './Card.css';
 
 function Card(tarefa) {
     const [tarefaDetalhe, setTarefaDetalhe] = useState(tarefa.state.data);

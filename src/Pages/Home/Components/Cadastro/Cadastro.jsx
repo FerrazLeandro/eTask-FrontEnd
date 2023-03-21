@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import Context from './../../../../Context/Context';
 import TarefaContext from './../../../../Context/TarefaContext';
+import './Cadastro.css'
 
 function Cadastro() {
     const [descricao, setDescricao] = useState('');

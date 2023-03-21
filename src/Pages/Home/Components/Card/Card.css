@@ -1,0 +1,25 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 10px;
+    background-color: #252525;
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.input {
+    width: 100%;
+    background-color: #ffffff36;
+    color: #fff;
+    border: none;
+    resize: none;
+    overflow-y: hidden;
+    border-radius: 5px;
+}
+
+.data {
+    font-size: 14px;
+    font-style: italic;
+}

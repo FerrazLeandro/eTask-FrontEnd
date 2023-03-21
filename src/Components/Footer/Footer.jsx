@@ -1,8 +1,10 @@
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import './Footer.css';
 
 function Footer() {
     return(
+        <div className='footer'>
         <Typography variant="body2" color="#000" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://leandroferraz.tech">
@@ -11,6 +13,7 @@ function Footer() {
             {new Date().getFullYear()}
             {'.'}
         </Typography>
+        </div>
     )
 }
 

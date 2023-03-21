@@ -5,7 +5,7 @@ import './Footer.css';
 function Footer() {
     return(
         <div className='footer'>
-        <Typography variant="body2" color="#000" align="center">
+        <Typography variant="body2" align="center">
             {'Copyright © '}
             <Link color="inherit" href="https://leandroferraz.tech">
                 Leandro Ferraz

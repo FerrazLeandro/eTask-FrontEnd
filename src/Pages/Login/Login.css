@@ -28,6 +28,10 @@
     margin-bottom: 15px;
 }
 
+.footerLogin {
+    color: #fff;
+}
+
 @media (max-width: 768px) {
     .login {
         width: 100vw;

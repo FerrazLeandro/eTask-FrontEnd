@@ -8,10 +8,9 @@ import { getUsuario } from './../../services/api';
 import Context from './../../Context/Context';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import './Login.css';
+import Footer from './../../Components/Footer/Footer';
 
 function Login() {
     const [user, setUser] = useContext(Context);
@@ -85,14 +84,7 @@ function Login() {
                     <p> Não perca mais tempo com a desorganização e a falta de foco. Comece a usar a plataforma eTask hoje mesmo e aumente sua produtividade e eficiência no gerenciamento de tarefas. Tudo isso de graça, veja como ela pode transformar a sua rotina.</p>
                 </div>
                 <Button variant="contained" onClick={() => logar()}>Entrar com o Google</Button>
-                <Typography variant="body2" color="#fff" align="center">
-                    {'Copyright © '}
-                    <Link color="inherit" href="https://leandroferraz.tech">
-                        Leandro Ferraz
-                    </Link>{' '}
-                    {new Date().getFullYear()}
-                    {'.'}
-                </Typography>
+                <Footer className='footerLogin' />
             </div>
         </div>
     );

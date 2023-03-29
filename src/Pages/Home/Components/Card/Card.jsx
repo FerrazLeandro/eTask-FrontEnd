@@ -34,7 +34,7 @@ function Card(tarefa) {
         }
     }
 
-    function handleShow (mensagem, tipo) {
+    function handleShow(mensagem, tipo) {
         Store.addNotification({
             title: "eTask",
             message: mensagem,
@@ -55,7 +55,9 @@ function Card(tarefa) {
             <div className='divTitulo'>
                 <Avatar alt="Usuário" sx={{ width: 28, height: 28, mr: 1 }} src={tarefaDetalhe?.usuario?.foto} />
                 <textarea className='titulo' spellCheck value={tarefaDetalhe.titulo} maxLength={50} disabled />
-                <MenuCard state={{ data: tarefa }} />
+                {tarefaDetalhe?.usuario?.id == user?.id &&
+                    <MenuCard state={{ data: tarefa }} />
+                }
             </div>
             <textarea className='descricao' rows={5} spellCheck type="text" value={tarefaDetalhe?.descricao} maxLength={50} disabled />
             <div className='divFooter'>

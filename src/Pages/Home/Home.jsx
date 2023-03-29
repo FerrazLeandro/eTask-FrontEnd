@@ -5,10 +5,10 @@ import Context from './../../Context/Context';
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import Card from './Components/Card/Card'
-import './Home.css';
 import TarefaContext from './../../Context/TarefaContext';
 import Cadastro from "./Components/Cadastro/Cadastro";
 import { getTarefas } from "../../services/api";
+import './Home.css';
 
 function Home() {
     const [user, setUser] = useContext(Context);
@@ -25,6 +25,10 @@ function Home() {
             console.error(e);
         }
     }
+
+    setTimeout(()=>{
+        buscarTarefas()
+    },5000)    
 
     useEffect(() => {
         if (!user)
